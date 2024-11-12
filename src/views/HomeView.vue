@@ -3,33 +3,28 @@
     <div class="mt-10 mx-auto py-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
       <div class="sm:text-center lg:text-left">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-900">
-          <span class="block xl:inline">這裡是</span>
-          <span class="block text-indigo-600 xl:inline">前端 Web 模板</span>
-          <span class="block xl:inline">
-            <loading-circle-icon
-              class="inline-block h-8 w-8 ml-3 animate-spin text-indigo-300"
-            />
-          </span>
+          <span class="block xl:inline">Freya</span>
+          <span class="block text-lime-600 xl:inline">芙蕾雅</span>
         </h1>
         <p class="mt-3 text-base text-gray-500">
-          Vite + Vue.js 3 + Tailwind CSS，為了快速發展專案而生，請自行修改內容。
+          為 LINE OpenChat 社群打擊機器人、廣告、垃圾訊息的專業平台
         </p>
         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
           <div class="rounded-md shadow">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-700 md:py-4 md:text-lg md:px-10"
               @click="onClickHello"
             >
-              Hello!
+              我的社群不想要廣告，我要 Freya！
             </button>
           </div>
           <div class="mt-3 sm:mt-0 sm:ml-3">
-            <a
-              href="https://github.com/web-tech-tw/template.inte"
-              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
+            <button
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-lime-700 bg-lime-100 hover:bg-lime-200 md:py-4 md:text-lg md:px-10"
+              @click="onClickHello"
             >
-              template.inte GitHub
-            </a>
+              我只是來查詢驗證碼的，進入社群管理中心
+            </button>
           </div>
         </div>
       </div>
@@ -37,20 +32,24 @@
     <div class="mt-10 mx-auto py-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
       <div class="sm:text-center lg:text-right">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-900">
-          <span class="block xl:inline">你是</span>
-          <span class="block text-indigo-600 xl:inline">後端</span>
-          <span class="block xl:inline">工程師嗎？</span>
+          <span class="block xl:inline">需要</span>
+          <span class="block text-lime-600 xl:inline">獨立安裝版</span>
+          <span class="block xl:inline">嗎？</span>
         </h1>
         <p class="mt-3 text-base text-gray-500">
-          你走錯地方了，下方連結才是後端 API 模板。
+          為了一些不可抗拒的原因，您需要自己架設 Freya 嗎？<br>
+          我們提供了一個簡易版的系統，讓您可以快速部署您的社群專屬驗證系統。
+        </p>
+        <p class="mt-3 text-base text-gray-500">
+          Freyja 是 Freya 的概念驗證版本，可以提供簡易的驗證功能。
         </p>
         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-end">
           <div class="rounded-md shadow">
             <a
-              href="https://github.com/web-tech-tw/template.recv"
-              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+              href="https://github.com/web-tech-tw/freyja"
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-700 md:py-4 md:text-lg md:px-10"
             >
-              template.recv GitHub
+              取得 Freyja (Freya 簡易版)
             </a>
           </div>
         </div>
@@ -63,12 +62,11 @@
 <script setup>
 import {ref} from "vue";
 
-import LoadingCircleIcon from "../components/LoadingCircleIcon.vue";
 import ToastModal from "../components/ToastModal.vue";
 
 const toastMessage = ref("");
 
 const onClickHello = () => {
-  toastMessage.value = "Hello!";
+  toastMessage.value = "一生懸命開發中 !!ouo!!";
 };
 </script>
