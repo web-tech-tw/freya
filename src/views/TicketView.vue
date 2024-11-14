@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <div :style="backgroundStyle" />
+  <div :style="backgroundStyle">
     <div
       v-if="isDead"
-      class="absolute top-36 flex flex-col w-full"
+      class="flex flex-wrap w-full justify-center bg-white py-20"
     >
       <div class="text-center text-red-500">
         發生錯誤
@@ -11,7 +10,7 @@
     </div>
     <div
       v-else-if="isLoad"
-      class="absolute top-36 flex flex-col w-full"
+      class="flex flex-wrap w-full justify-center bg-white py-20"
     >
       <div class="flex justify-center my-16">
         <loading-circle-icon class="h-8 w-8 animate-spin text-lime-600" />
@@ -19,7 +18,8 @@
     </div>
     <div
       v-else
-      class="absolute top-36 flex w-full justify-center"
+      class="flex flex-wrap w-full justify-center py-20"
+      :class="backdropClass"
     >
       <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20">
         <div class="flex justify-center md:justify-end -mt-16">
@@ -145,17 +145,29 @@ const isSubmmited = computed(() => {
 });
 
 const descriptionHtml = computed(() => {
+  const escapeMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#039;",
+  };
   const {description} = roomData;
-  return description?.replaceAll("\n", "<br />");
+  return description?.
+    replace(/[&<>"']/g, (i) => escapeMap[i]).
+    replaceAll("\n", "<br />");
 });
 
 const backgroundStyle = computed(() => {
   const {backgroundImage} = roomData;
-  return {
-    "backgroundImage": `url(${backgroundImage})`,
-    "filter": "brightness(0.3)",
-    "height": "100vh",
-  };
+  return !!backgroundImage ? {
+    backgroundImage: `url(${backgroundImage})`,
+  } : {};
+});
+
+const backdropClass = computed(() => {
+  const {backgroundImage} = roomData;
+  return !!backgroundImage ? "backdrop-brightness-50" : "";
 });
 
 const onClickCopy = async () => {

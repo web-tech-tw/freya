@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <div :style="backgroundStyle" />
+  <div :style="backgroundStyle">
     <div
       v-if="isDead"
-      class="absolute top-36 flex flex-col w-full"
+      class="flex flex-wrap w-full justify-center bg-white py-20"
     >
       <div class="text-center text-red-500">
         發生錯誤
@@ -11,7 +10,7 @@
     </div>
     <div
       v-else-if="isLoad"
-      class="absolute top-36 flex flex-col w-full"
+      class="flex flex-wrap w-full justify-center bg-white py-20"
     >
       <div class="flex justify-center my-16">
         <loading-circle-icon class="h-8 w-8 animate-spin text-lime-600" />
@@ -19,7 +18,8 @@
     </div>
     <div
       v-else
-      class="absolute top-36 flex flex-col w-full justify-start"
+      class="flex flex-wrap w-full justify-center py-20"
+      :class="backdropClass"
     >
       <div class="w-full flex justify-center">
         <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg mt-20 mb-8">
@@ -183,11 +183,14 @@ const isValid = computed(() => {
 
 const backgroundStyle = computed(() => {
   const {backgroundImage} = roomData;
-  return {
-    "backgroundImage": `url(${backgroundImage})`,
-    "filter": "brightness(0.3)",
-    "height": "100vh",
-  };
+  return !!backgroundImage ? {
+    backgroundImage: `url(${backgroundImage})`,
+  } : {};
+});
+
+const backdropClass = computed(() => {
+  const {backgroundImage} = roomData;
+  return !!backgroundImage ? "backdrop-brightness-50" : "";
 });
 
 watch(submissionCode, (v) => {

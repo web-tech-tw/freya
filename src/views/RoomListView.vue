@@ -28,7 +28,7 @@
           :key="j"
           class="border-gray-400 flex flex-row mb-2"
         >
-          <div class="rounded-md flex flex-1 items-center p-4 border-2 mt-3 border-lime-400">
+          <div class="rounded-md flex flex-1 items-center p-4 border-2 mt-3 border-lime-400 justify-between">
             <img
               :alt="i.label"
               :src="i.backgroundImage"

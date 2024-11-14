@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <div :style="backgroundStyle" />
-    <div class="absolute top-36 flex w-full justify-center">
+  <div :style="backgroundStyle">
+    <div
+      class="flex flex-wrap w-full justify-center py-20"
+      :class="backdropClass"
+    >
       <div
         v-if="step === 1"
         class="w-full md:w-2/3 mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
@@ -228,11 +230,14 @@ const roomData = reactive({
 
 const backgroundStyle = computed(() => {
   const {backgroundImage} = roomData;
-  return {
-    "backgroundImage": `url(${backgroundImage})`,
-    "filter": "brightness(0.3)",
-    "height": "100vh",
-  };
+  return !!backgroundImage ? {
+    backgroundImage: `url(${backgroundImage})`,
+  } : {};
+});
+
+const backdropClass = computed(() => {
+  const {backgroundImage} = roomData;
+  return !!backgroundImage ? "backdrop-brightness-50" : "";
 });
 
 const onClickNext = () => {
