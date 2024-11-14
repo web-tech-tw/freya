@@ -61,6 +61,8 @@ import {useClient} from "../clients/freya.js";
 
 import LoadingCircleIcon from "../components/LoadingCircleIcon.vue";
 
+const client = useClient();
+
 const data = reactive([]);
 
 const isLoad = ref(false);
@@ -70,11 +72,14 @@ const isEmpty = computed(
 );
 
 onMounted(async () => {
-  const client = useClient();
-
   isLoad.value = true;
-  const result = await client.get("rooms").json();
-  data.push(...result);
+  try {
+    const result = await client.get("rooms").json();
+    data.push(...result);
+  } catch (error) {
+    isDead.value = true;
+    console.error(error);
+  }
   isLoad.value = false;
 });
 </script>

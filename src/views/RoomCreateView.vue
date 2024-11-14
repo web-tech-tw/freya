@@ -4,7 +4,7 @@
     <div class="absolute top-36 flex w-full justify-center">
       <div
         v-if="step === 1"
-        class="max-w-md mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
+        class="w-full md:w-2/3 mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
       >
         <h2 class="text-gray-800 text-3xl font-semibold">
           建立社群資訊
@@ -33,7 +33,7 @@
       </div>
       <div
         v-else-if="step === 2"
-        class="max-w-md md:w-1/2 mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
+        class="w-full md:w-2/3 mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
       >
         <h2 class="text-gray-800 text-3xl font-semibold">
           建立社群資訊
@@ -45,7 +45,7 @@
           <input
             v-model="roomData.pageUrl"
             placeholder="https://line.me/ti/g2/J7bTfoHgmfgc42C9baJNs2gwH00kAMd9QfJDsQ"
-            class="h-12 w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
+            class="w-full border-none bg-transparent px-4 py-3 text-gray-900 outline-none focus:outline-none text-gray-500"
             type="text"
           >
         </div>
@@ -64,7 +64,7 @@
       </div>
       <div
         v-else-if="step === 3"
-        class="max-w-md mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
+        class="w-full md:w-2/3 mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
       >
         <div class="flex justify-center md:justify-end -mt-16">
           <img
@@ -85,7 +85,7 @@
         <div class="w-full my-8 text-gray-600 flex rounded bg-white shadow-md">
           <textarea
             :value="verifyMessage"
-            class="h-12 w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500 resize-none"
+            class="w-full border-none bg-transparent px-4 py-3 text-gray-900 outline-none focus:outline-none text-gray-500 resize-none"
             readonly
           />
           <button
@@ -124,7 +124,7 @@
       </div>
       <div
         v-else-if="step === 4"
-        class="max-w-md mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
+        class="w-full md:w-2/3 mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
       >
         <h2 class="text-gray-800 text-3xl font-semibold">
           歡迎加入芙蕾雅！<br>
@@ -159,7 +159,7 @@
       </div>
       <div
         v-else
-        class="max-w-md mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
+        class="w-full md:w-2/3 mx-3 my-5 py-4 px-8 bg-white shadow-lg rounded-lg"
       >
         <h2 class="text-gray-800 text-3xl font-semibold">
           錯誤

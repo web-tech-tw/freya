@@ -1,7 +1,26 @@
 <template>
   <div>
     <div :style="backgroundStyle" />
-    <div class="absolute top-36 flex w-full justify-center">
+    <div
+      v-if="isDead"
+      class="absolute top-36 flex flex-col w-full"
+    >
+      <div class="text-center text-red-500">
+        發生錯誤
+      </div>
+    </div>
+    <div
+      v-else-if="isLoad"
+      class="absolute top-36 flex flex-col w-full"
+    >
+      <div class="flex justify-center my-16">
+        <loading-circle-icon class="h-8 w-8 animate-spin text-lime-600" />
+      </div>
+    </div>
+    <div
+      v-else
+      class="absolute top-36 flex w-full justify-center"
+    >
       <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20">
         <div class="flex justify-center md:justify-end -mt-16">
           <img
@@ -23,7 +42,7 @@
           <div class="w-full my-4 text-gray-600 flex rounded bg-white shadow-md">
             <input
               :value="submissionCode"
-              class="h-12 w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
+              class="w-full border-none bg-transparent px-4 py-3 text-gray-900 outline-none focus:outline-none text-gray-500"
               type="text"
               readonly
             >
@@ -105,6 +124,7 @@ const {
 } = route.params;
 
 const isLoad = ref(false);
+const isDead = ref(false);
 const isCopy = ref(false);
 
 const statusMessage = ref("");
@@ -182,7 +202,14 @@ const onSubmit = async () => {
 };
 
 onMounted(async () => {
-  const result = await client.get(`rooms/${roomCode}`).json();
-  Object.assign(roomData, result);
+  isLoad.value = true;
+  try {
+    const result = await client.get(`rooms/${roomCode}`).json();
+    Object.assign(roomData, result);
+  } catch (error) {
+    isDead.value = true;
+    console.error(error);
+  }
+  isLoad.value = false;
 });
 </script>
