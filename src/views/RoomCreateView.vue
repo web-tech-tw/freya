@@ -45,7 +45,7 @@
           <input
             v-model="roomData.pageUrl"
             placeholder="https://line.me/ti/g2/J7bTfoHgmfgc42C9baJNs2gwH00kAMd9QfJDsQ"
-            class="w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
+            class="h-12 w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
             type="text"
           >
         </div>
@@ -85,7 +85,7 @@
         <div class="w-full my-8 text-gray-600 flex rounded bg-white shadow-md">
           <textarea
             :value="verifyMessage"
-            class="w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500 resize-none"
+            class="h-12 w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500 resize-none"
             readonly
           />
           <button

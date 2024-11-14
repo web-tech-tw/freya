@@ -27,7 +27,7 @@
             <input
               v-model="submissionCode"
               placeholder="pmShBo2Bg"
-              class="w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
+              class="h-12 w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
               type="text"
             >
             <button

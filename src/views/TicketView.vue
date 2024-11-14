@@ -23,7 +23,7 @@
           <div class="w-full my-4 text-gray-600 flex rounded bg-white shadow-md">
             <input
               :value="submissionCode"
-              class="w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
+              class="h-12 w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
               type="text"
               readonly
             >

@@ -20,17 +20,20 @@
           <p class="mt-6 text-gray-600">
             成員人數：{{ roomData.members }}
           </p>
-          <p
-            class="mt-6 text-gray-600"
-            v-html="descriptionHtml"
-          />
+          <div class="mt-6 text-gray-600">
+            簡介：
+            <p
+              class="my-2 mx-1 text-gray-800 text-sm"
+              v-html="descriptionHtml"
+            />
+          </div>
           <p class="mt-4 text-gray-600">
             社群邀請網址：
           </p>
           <div class="w-full mb-4 text-gray-600 flex rounded bg-white shadow-md">
             <input
               :value="inviteUrl"
-              class="w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
+              class="h-12 w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none text-gray-500"
               type="text"
               readonly
             >
