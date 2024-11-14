@@ -43,7 +43,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, _, next) => {
-  if (to.path === "/") {
+  if (
+    to.path === "/" ||
+    to.path === "/terms" ||
+    to.path.startsWith("/ti/g2/")
+  ) {
     next();
     return;
   }
