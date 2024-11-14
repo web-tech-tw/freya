@@ -1,4 +1,5 @@
 import {createRouter, createWebHashHistory} from "vue-router";
+import {useProfile, redirectLogin} from "../plugins/profile.js";
 
 const routes = [
   {
@@ -35,6 +36,20 @@ const router = createRouter({
   scrollBehavior: () => ({top: 0}),
   history: createWebHashHistory(),
   routes,
+});
+
+router.beforeEach((to, _, next) => {
+  if (to.path === "/") {
+    next();
+  }
+
+  const profile = useProfile();
+  if (!profile) {
+    redirectLogin(true);
+    return;
+  }
+
+  next();
 });
 
 export default router;
