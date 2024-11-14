@@ -1,4 +1,4 @@
-import {onMounted, onBeforeUnmount} from "vue";
+import {onBeforeUnmount} from "vue";
 
 const {VITE_TURNSTILE_SITE_KEY: turnstileSiteKey} = import.meta.env;
 const scriptSourceUrl = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=loadTurnstile";
@@ -18,7 +18,12 @@ export function loadTurnstile(selector, callback) {
   if (!turnstileSiteKey) {
     throw new Error("turnstileSiteKey is required for loadTurnstile");
   }
-  document.head.appendChild(turnstileScript);
+  if (!selector) {
+    throw new Error("selector is required for loadTurnstile");
+  }
+  if (!document.head.contains(turnstileScript)) {
+    document.head.appendChild(turnstileScript);
+  }
   window.loadTurnstile = () => {
     window.turnstile.render(selector, {
       sitekey: turnstileSiteKey,
@@ -34,6 +39,9 @@ export function loadTurnstile(selector, callback) {
  * @returns {void}
  */
 export function unloadTurnstile() {
+  if (!document.head.contains(turnstileScript)) {
+    return;
+  }
   document.head.removeChild(turnstileScript);
 }
 
@@ -41,22 +49,26 @@ export function unloadTurnstile() {
  * Vue 3 composition function to use the Turnstile widget.
  * @module turnstile
  * @function
- * @param {string} selector - The CSS selector to render the Turnstile widget.
- * @returns {Promise<string>} The promise that resolves when the Turnstile widget is solved.
+ * @returns {object} The methods to use the Turnstile widget.
  */
-export function useTurnstile(selector) {
-  if (!selector) {
-    throw new Error("selector is required for useTurnstile");
-  }
-  return new Promise((resolve) => {
-    // Attach the Turnstile script when the component is mounted.
-    onMounted(
-      () => loadTurnstile(selector, resolve),
-    );
+export function useTurnstile() {
+  // Detach the Turnstile script when the component is unmounted.
+  onBeforeUnmount(
+    () => unloadTurnstile(),
+  );
 
-    // Detach the Turnstile script when the component is unmounted.
-    onBeforeUnmount(
-      () => unloadTurnstile(),
-    );
-  });
+  let resolvedValue = null;
+  return {
+    render: (selector) => {
+      resolvedValue = new Promise((resolve) => {
+        loadTurnstile(selector, resolve);
+      });
+    },
+    token: () => {
+      return resolvedValue;
+    },
+    clear: () => {
+      resolvedValue = null;
+    },
+  };
 }

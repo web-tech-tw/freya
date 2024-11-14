@@ -78,7 +78,7 @@
             @click="onClickRefresh"
           >
             <loading-circle-icon
-              v-if="isLoad"
+              v-if="isLoadRefresh"
               class="h-6 w-6 animate-spin"
             />
             <span v-else>
@@ -125,6 +125,8 @@ const {
 
 const isLoad = ref(false);
 const isDead = ref(false);
+
+const isLoadRefresh = ref(false);
 const isCopy = ref(false);
 
 const statusMessage = ref("");
@@ -175,11 +177,11 @@ const onClickCopyInviteUrl = async () => {
 };
 
 const onClickRefresh = async () => {
-  isLoad.value = true;
+  isLoadRefresh.value = true;
   const result = await client.patch(`rooms/${roomCode}`).json();
   Object.assign(roomData, result);
   statusMessage.value = "更新成功";
-  isLoad.value = false;
+  isLoadRefresh.value = false;
 };
 
 const onClickCommit = () => {

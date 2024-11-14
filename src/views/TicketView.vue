@@ -87,7 +87,7 @@
               @click="onSubmit"
             >
               <loading-circle-icon
-                v-if="isLoad"
+                v-if="isLoadSubmit"
                 class="h-6 w-6 animate-spin"
               />
               <span v-else>加入社群</span>
@@ -117,7 +117,7 @@ import {useTurnstile} from "../plugins/turnstile.js";
 
 const route = useRoute();
 const client = useClient();
-const turnstile = useTurnstile("#captcha");
+const turnstile = useTurnstile();
 
 const {
   roomCode,
@@ -125,6 +125,8 @@ const {
 
 const isLoad = ref(false);
 const isDead = ref(false);
+
+const isLoadSubmit = ref(false);
 const isCopy = ref(false);
 
 const statusMessage = ref("");
@@ -154,10 +156,6 @@ const backgroundStyle = computed(() => {
     "filter": "brightness(0.3)",
     "height": "100vh",
   };
-});
-
-turnstile.then((token) => {
-  captchaToken.value = token;
 });
 
 const onClickCopy = async () => {
@@ -190,7 +188,7 @@ const onSubmit = async () => {
     return;
   }
 
-  isLoad.value = true;
+  isLoadSubmit.value = true;
   const result = await client.post("submissions", {
     json: {
       captcha: captchaToken.value,
@@ -198,7 +196,7 @@ const onSubmit = async () => {
     },
   }).json();
   submissionCode.value = result.code;
-  isLoad.value = false;
+  isLoadSubmit.value = false;
 };
 
 onMounted(async () => {
@@ -211,5 +209,10 @@ onMounted(async () => {
     console.error(error);
   }
   isLoad.value = false;
+
+  if (!isDead.value) {
+    turnstile.render("#captcha");
+    captchaToken.value = await turnstile.token();
+  }
 });
 </script>

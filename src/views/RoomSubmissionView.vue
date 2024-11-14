@@ -54,7 +54,7 @@
               @click="onClickAction"
             >
               <loading-circle-icon
-                v-if="isLoad"
+                v-if="isLoadAction"
                 class="h-6 w-6 animate-spin"
               />
               <x-mark-icon
@@ -74,7 +74,7 @@
         class="w-full flex justify-center"
       >
         <div
-          v-if="isLoad"
+          v-if="isLoadAction"
           class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg mb-20"
         >
           <loading-circle-icon
@@ -156,6 +156,8 @@ const {
 
 const isLoad = ref(false);
 const isDead = ref(false);
+
+const isLoadAction = ref(false);
 const isQuery = ref(false);
 
 const statusMessage = ref("");
@@ -208,7 +210,7 @@ const onClickAction = async () => {
   }
 
   submissionData.code = submissionCode.value;
-  isLoad.value = true;
+  isLoadAction.value = true;
   isQuery.value = true;
   try {
     const submission = await client.get(
@@ -218,7 +220,7 @@ const onClickAction = async () => {
   } catch (error) {
     console.error(error);
   }
-  isLoad.value = false;
+  isLoadAction.value = false;
 };
 
 onMounted(async () => {

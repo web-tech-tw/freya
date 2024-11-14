@@ -10,18 +10,18 @@
       >
         網站原始碼
       </a>
-      <router-link
-        class="mr-3"
-        to="/terms"
-      >
-        服務條款
-      </router-link>
       <a
         class="mr-3"
         href="https://web-tech.tw/#/privacy"
       >
         隱私權政策
       </a>
+      <router-link
+        class="mr-3"
+        to="/terms"
+      >
+        服務條款
+      </router-link>
     </div>
     <div class="max-w-7xl mx-auto mt-5 divide-y divide-gray-200 px-4 sm:px-6 md:px-8">
       &copy; {{ year }}
