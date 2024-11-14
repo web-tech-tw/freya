@@ -12,16 +12,16 @@
         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
           <div class="rounded-md shadow">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-700 md:py-4 md:text-lg md:px-10"
-              @click="onClickHello"
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-600 md:py-4 md:text-lg md:px-10"
+              @click="onClickRoomCreate"
             >
               我的社群不想要廣告，我要 Freya！
             </button>
           </div>
           <div class="mt-3 sm:mt-0 sm:ml-3">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-lime-700 bg-lime-100 hover:bg-lime-200 md:py-4 md:text-lg md:px-10"
-              @click="onClickHello"
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-lime-600 bg-lime-100 hover:bg-lime-200 md:py-4 md:text-lg md:px-10"
+              @click="onClickRoomManage"
             >
               我只是來查詢驗證碼的，進入社群管理中心
             </button>
@@ -47,7 +47,7 @@
           <div class="rounded-md shadow">
             <a
               href="https://github.com/web-tech-tw/freyja"
-              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-700 md:py-4 md:text-lg md:px-10"
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-600 md:py-4 md:text-lg md:px-10"
             >
               取得 Freyja (Freya 簡易版)
             </a>
@@ -56,17 +56,18 @@
       </div>
     </div>
   </div>
-  <toast-modal v-model="toastMessage" />
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {useRouter} from "vue-router";
 
-import ToastModal from "../components/ToastModal.vue";
+const router = useRouter();
 
-const toastMessage = ref("");
+const onClickRoomCreate = () => {
+  router.push("/rooms/create");
+};
 
-const onClickHello = () => {
-  toastMessage.value = "一生懸命開發中 !!ouo!!";
+const onClickRoomManage = () => {
+  router.push("/rooms");
 };
 </script>
