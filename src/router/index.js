@@ -41,6 +41,7 @@ const router = createRouter({
 router.beforeEach((to, _, next) => {
   if (to.path === "/") {
     next();
+    return;
   }
 
   const profile = useProfile();
