@@ -15,7 +15,7 @@
               class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-600 md:py-4 md:text-lg md:px-10"
               @click="onClickRoomCreate"
             >
-              我的社群不想要廣告，我要安裝芙蕾雅！
+              我的社群已經受夠垃圾訊息了！幫幫我！芙蕾雅女神！
             </button>
           </div>
           <div class="mt-3 sm:mt-0 sm:ml-3">
@@ -23,7 +23,7 @@
               class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-lime-600 bg-lime-100 hover:bg-lime-200 md:py-4 md:text-lg md:px-10"
               @click="onClickRoomManage"
             >
-              我只是來查詢驗證碼的，進入社群管理中心
+              我的社群已經受到女神庇護，我要進入社群管理中心
             </button>
           </div>
         </div>

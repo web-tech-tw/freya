@@ -146,7 +146,7 @@
           恭喜您已經成功為
           {{ roomData.label }}
           設定 Freya 芙蕾雅，
-          擺脫惡意廣告夢魘啦！
+          擺脫垃圾夢魘啦！
         </p>
         <div class="flex justify-end mt-8">
           <button
