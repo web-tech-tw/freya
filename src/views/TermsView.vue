@@ -3,10 +3,10 @@
     <div class="prose">
       <h1>Freya 芙蕾雅 服務條款</h1>
       <p>
-        本條款已於台北時間 2024年11月13日 上午12點2分 更新，煩請您詳細閱讀。
+        本條款已於台北時間 2024年11月15日 上午2點15分 更新，煩請您詳細閱讀。
       </p>
       <p>
-        歡迎各 LINE Open Chat 社群採用 Freya 芙蕾雅，本服務意旨於提供各大社群一個防廣告、防騷擾、防惡意連結的環境。
+        歡迎各 LINE OpenChat 社群採用 Freya 芙蕾雅，本服務意旨於提供各大社群一個防廣告、防騷擾、防惡意連結的環境。
       </p>
       <p>
         但為維護平台安全及和平共處， 本平台除要求各社群須遵守
@@ -59,7 +59,7 @@
             </a>
             或是
             <a
-              href="https://webtech.tw/contact"
+              href="https://web-tech.tw/contact"
               target="_blank"
             >
               聯絡我們
