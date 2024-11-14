@@ -15,7 +15,7 @@
               class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-600 md:py-4 md:text-lg md:px-10"
               @click="onClickRoomCreate"
             >
-              我的社群不想要廣告，我要 Freya！
+              我的社群不想要廣告，我要安裝芙蕾雅！
             </button>
           </div>
           <div class="mt-3 sm:mt-0 sm:ml-3">

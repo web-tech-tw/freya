@@ -1,27 +1,50 @@
 <template>
   <div class="my-9">
     <div class="my-3 text-xl text-center">
-      社群列表
+      管理社群驗證申請
     </div>
-    <div class="container mb-2 flex mx-auto w-full items-center justify-center">
-      <ul class="flex flex-col p-4 w-full md:w-2/3 lg:w-1/2">
+    <div v-if="isDead">
+      <div class="text-center text-red-500">
+        發生錯誤
+      </div>
+    </div>
+    <div v-else-if="isLoad">
+      <div class="flex justify-center my-16">
+        <loading-circle-icon class="h-8 w-8 animate-spin text-lime-600" />
+      </div>
+    </div>
+    <div v-else-if="isEmpty">
+      <div class="text-center text-gray-500">
+        無資料
+      </div>
+    </div>
+    <div
+      v-else
+      class="container mb-2 flex mx-auto w-full items-center justify-center"
+    >
+      <ul class="flex flex-col p-4">
         <li
           v-for="(i, j) in data"
           :key="j"
           class="border-gray-400 flex flex-row mb-2"
         >
           <div class="rounded-md flex flex-1 items-center p-4 border-2 mt-3 border-lime-400">
-            <div class="flex-1 pl-1 mr-16">
+            <img
+              :alt="i.label"
+              :src="i.backgroundImage"
+              class="h-12 w-12 rounded-full object-cover"
+            >
+            <div class="mx-4">
               <div class="font-medium">
                 {{ i.label }}
               </div>
-              <div class="font-normal inline">
+              <div class="font-normal truncate text-gray-700 hidden md:block md:max-w-xs lg:max-w-md">
                 {{ i.description }}
               </div>
             </div>
             <router-link
               :to="`/rooms/${i.code}`"
-              class="w-1/4 text-wrap text-center flex flex-col text-white text-bold rounded-md bg-lime-500 hover:bg-lime-700 justify-center items-center mr-10 p-2"
+              class="text-white rounded-md bg-green-700 hover:bg-green-800 p-2"
             >
               查看
             </router-link>
@@ -33,14 +56,25 @@
 </template>
 
 <script setup>
-import {reactive, onMounted} from "vue";
+import {ref, computed, reactive, onMounted} from "vue";
 import {useClient} from "../clients/freya.js";
+
+import LoadingCircleIcon from "../components/LoadingCircleIcon.vue";
 
 const data = reactive([]);
 
+const isLoad = ref(false);
+const isDead = ref(false);
+const isEmpty = computed(
+  () => data.length === 0,
+);
+
 onMounted(async () => {
   const client = useClient();
+
+  isLoad.value = true;
   const result = await client.get("rooms").json();
   data.push(...result);
+  isLoad.value = false;
 });
 </script>

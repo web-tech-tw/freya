@@ -19,8 +19,12 @@ const routes = [
     component: () => import("../views/RoomManageView.vue"),
   },
   {
-    path: "/submissions/:roomCode",
-    component: () => import("../views/SubmissionView.vue"),
+    path: "/rooms/:roomCode/submissions",
+    component: () => import("../views/RoomSubmissionView.vue"),
+  },
+  {
+    path: "/ti/g2/:roomCode",
+    component: () => import("../views/TicketView.vue"),
   },
   {
     path: "/terms",
