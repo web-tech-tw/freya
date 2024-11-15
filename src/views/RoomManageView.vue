@@ -76,6 +76,7 @@
           <button
             class="flex items-center justify-center bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full mr-3"
             @click="onClickRefresh"
+            :disabled="isLoadRefresh"
           >
             <loading-circle-icon
               v-if="isLoadRefresh"

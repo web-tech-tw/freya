@@ -85,6 +85,7 @@
             <button
               class="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
               @click="onSubmit"
+              :disabled="isLoadSubmit"
             >
               <loading-circle-icon
                 v-if="isLoadSubmit"
