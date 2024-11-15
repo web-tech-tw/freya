@@ -1,7 +1,7 @@
 <template>
   <div class="my-9">
     <div class="my-3 text-xl text-center">
-      管理社群驗證申請
+      您所持有管理權限的社群
     </div>
     <div v-if="isDead">
       <div class="text-center text-red-500">

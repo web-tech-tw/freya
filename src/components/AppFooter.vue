@@ -1,7 +1,7 @@
 <template>
   <footer class="mt-16 pb-16 text-sm leading-6">
     <div class="max-w-7xl mx-auto mt-11 divide-y divide-gray-200 px-4 sm:px-6 md:px-8">
-      「Freya 芙蕾雅」是LINE 社群加入申請驗證平台。
+      「Freya 芙蕾雅」是一個是 LINE 社群加入申請驗證平台，以打擊垃圾訊息為作為使命。
     </div>
     <div class="max-w-7xl mx-auto mt-5 divide-y divide-gray-200 px-4 sm:px-6 md:px-8 text-sky-700">
       <a
