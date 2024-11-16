@@ -45,7 +45,7 @@ import {useRouter} from "vue-router";
 import {redirectLogin, useProfile} from "../plugins/profile.js";
 
 const router = useRouter();
-const profile = useProfile();
+const profile = useProfile(200);
 
 const onClickRedirectRooms = () => {
   router.push("/rooms");
