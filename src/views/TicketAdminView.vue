@@ -55,7 +55,7 @@
         </div>
         <div class="flex justify-end mt-8">
           <button
-            class="flex items-center justify-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mr-3"
+            class="flex items-center justify-center bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full mr-3"
             :disabled="isDisabled"
             @click="onClickAccept"
           >
@@ -163,12 +163,12 @@ const onClickAccept = async () => {
     statusMessage.value = "接受成功";
     setTimeout(() => {
       router.push(`/rooms/${invitationData.roomCode}`);
-    }, 3000);
+    }, 1500);
   } catch (error) {
     statusMessage.value = "接受失敗";
+    isLoadAccept.value = false;
     console.error(error);
   }
-  isLoadAccept.value = false;
 };
 
 const onClickReject = async () => {
@@ -178,12 +178,12 @@ const onClickReject = async () => {
     statusMessage.value = "拒絕成功";
     setTimeout(() => {
       router.push("/");
-    }, 3000);
+    }, 1500);
   } catch (error) {
     statusMessage.value = "拒絕失敗";
+    isLoadReject.value = false;
     console.error(error);
   }
-  isLoadReject.value = false;
 };
 
 onMounted(async () => {

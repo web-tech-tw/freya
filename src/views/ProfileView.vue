@@ -20,7 +20,7 @@
         </p>
         <div class="flex justify-end mt-8">
           <button
-            class="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mr-2"
+            class="flex items-center justify-center bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full mr-2"
             @click="onClickRedirectRooms"
           >
             管理社群
