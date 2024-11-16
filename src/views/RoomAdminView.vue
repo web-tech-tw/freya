@@ -109,8 +109,11 @@
 import {ref, reactive, computed, onMounted} from "vue";
 
 import {useRoute} from "vue-router";
-import {getUserProfile, useClient} from "../clients/freya";
-import {useClient as useSaraClient} from "../clients/sara";
+import {useClient} from "../clients/freya";
+import {
+  useClient as useSaraClient,
+  getUserProfile,
+} from "../clients/sara";
 import {useProfile} from "../plugins/profile";
 
 import {
