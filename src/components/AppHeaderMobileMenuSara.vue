@@ -12,7 +12,7 @@
   >
     <template #prepend>
       <img
-        :src="identicon"
+        :src="avatarUrl"
         :alt="nickname"
         class="rounded-full w-6 h-6 mr-4"
       >
@@ -36,9 +36,9 @@ const nickname = computed(() => {
   return nickname;
 });
 
-const identicon = computed(() => {
-  const {avatar_hash: avatarHash} = profile;
-  return `https://api.gravatar.com/avatar/${avatarHash}?d=identicon`;
+const avatarUrl = computed(() => {
+  const {avatarUrl} = profile;
+  return avatarUrl;
 });
 
 const onClick = () => {

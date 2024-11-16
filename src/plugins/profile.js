@@ -5,11 +5,11 @@ const {
   VITE_SARA_TOKEN_NAME: saraTokenName,
 } = import.meta.env;
 
-const hashToGravatar = (hash, size=20) => {
+const hashToGravatar = (hash, size=80) => {
   return `https://api.gravatar.com/avatar/${hash}?d=identicon&s=${size}`;
 };
 
-export const useProfile = (avatarSize=20) => {
+export const useProfile = (avatarsize=80) => {
   const saraToken = localStorage.getItem(saraTokenName);
   if (!saraToken) {
     return null;
