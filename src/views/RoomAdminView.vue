@@ -51,6 +51,7 @@
             title="複製"
             class="m-2 rounded px-4 py-2 font-semibold"
             @click="onClickSend"
+            :disabled="isSent"
           >
             <check-icon
               v-if="isSent"
