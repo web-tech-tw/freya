@@ -9,7 +9,7 @@ const hashToGravatar = (hash, size=80) => {
   return `https://api.gravatar.com/avatar/${hash}?d=identicon&s=${size}`;
 };
 
-export const useProfile = (avatarsize=80) => {
+export const useProfile = (avatarSize=80) => {
   const saraToken = localStorage.getItem(saraTokenName);
   if (!saraToken) {
     return null;
