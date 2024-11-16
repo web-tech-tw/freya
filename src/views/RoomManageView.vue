@@ -37,6 +37,9 @@
             </span>
           </h2>
           <p class="mt-6 text-gray-600">
+            管理員人數：{{ administrators }}
+          </p>
+          <p class="text-gray-600">
             成員人數：{{ roomData.members }}
           </p>
           <div class="mt-6 text-gray-600">
@@ -75,8 +78,8 @@
         <div class="flex justify-end mt-8">
           <button
             class="flex items-center justify-center bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full mr-3"
-            @click="onClickRefresh"
             :disabled="isLoadRefresh"
+            @click="onClickRefresh"
           >
             <loading-circle-icon
               v-if="isLoadRefresh"
@@ -85,6 +88,12 @@
             <span v-else>
               更新資訊
             </span>
+          </button>
+          <button
+            class="flex items-center justify-center bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-full mr-3"
+            @click="onClickInvite"
+          >
+            共同管理員
           </button>
           <button
             class="flex items-center justify-center bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
@@ -137,6 +146,11 @@ const roomData = reactive({
   members: 0,
   description: "",
   backgroundImage: "",
+  administrators: [],
+});
+
+const administrators = computed(() => {
+  return roomData.administrators.length;
 });
 
 const inviteUrl = computed(() => {
@@ -195,6 +209,10 @@ const onClickRefresh = async () => {
   Object.assign(roomData, result);
   statusMessage.value = "更新成功";
   isLoadRefresh.value = false;
+};
+
+const onClickInvite = () => {
+  router.push(`/rooms/${roomCode}/administrators`);
 };
 
 const onClickCommit = () => {

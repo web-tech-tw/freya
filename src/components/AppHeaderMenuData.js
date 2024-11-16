@@ -11,7 +11,7 @@ export const isSaraEnabled = true;
 export const onClickSara = (profile) => {
   const isLoggedIn = !!profile;
   if (isLoggedIn) {
-    router.push("/rooms");
+    router.push("/profile");
   } else {
     redirectLogin(true);
   }

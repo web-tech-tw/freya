@@ -51,8 +51,8 @@
             >
             <button
               class="m-2 rounded px-4 py-2 font-semibold"
-              @click="onClickAction"
               :disabled="isLoadAction"
+              @click="onClickAction"
             >
               <loading-circle-icon
                 v-if="isLoadAction"

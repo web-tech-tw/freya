@@ -5,7 +5,11 @@ const {
   VITE_SARA_TOKEN_NAME: saraTokenName,
 } = import.meta.env;
 
-export const useProfile = () => {
+const hashToGravatar = (hash, size=20) => {
+  return `https://api.gravatar.com/avatar/${hash}?d=identicon&s=${size}`;
+};
+
+export const useProfile = (avatarSize=20) => {
   const saraToken = localStorage.getItem(saraTokenName);
   if (!saraToken) {
     return null;
@@ -16,7 +20,10 @@ export const useProfile = () => {
     if (Date.now() >= data.exp * 1000) {
       throw new Error("sara token expired");
     }
-    return data?.user;
+    const profile = data?.user;
+    const avatarHash = profile?.avatar_hash;
+    const avatarUrl = hashToGravatar(avatarHash, avatarSize);
+    return {...profile, avatarUrl};
   } catch (e) {
     console.warn(e);
     localStorage.removeItem(saraTokenName);

@@ -7,6 +7,10 @@ const routes = [
     component: () => import("../views/HomeView.vue"),
   },
   {
+    path: "/profile",
+    component: () => import("../views/ProfileView.vue"),
+  },
+  {
     path: "/rooms/create",
     component: () => import("../views/RoomCreateView.vue"),
   },
@@ -23,8 +27,16 @@ const routes = [
     component: () => import("../views/RoomSubmissionView.vue"),
   },
   {
+    path: "/rooms/:roomCode/administrators",
+    component: () => import("../views/RoomAdminView.vue"),
+  },
+  {
     path: "/ti/g2/:roomCode",
-    component: () => import("../views/TicketView.vue"),
+    component: () => import("../views/TicketRoomView.vue"),
+  },
+  {
+    path: "/ti/g2a/:invitationCode",
+    component: () => import("../views/TicketAdminView.vue"),
   },
   {
     path: "/terms",

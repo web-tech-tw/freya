@@ -1,7 +1,15 @@
 <template>
   <div :style="backgroundStyle">
     <div
-      v-if="isDead"
+      v-if="isNotFound"
+      class="flex flex-wrap w-full justify-center bg-white py-20"
+    >
+      <div class="text-center text-amber-700">
+        社群不存在
+      </div>
+    </div>
+    <div
+      v-else-if="isDead"
       class="flex flex-wrap w-full justify-center bg-white py-20"
     >
       <div class="text-center text-red-500">
@@ -84,8 +92,8 @@
           <div class="flex justify-end mt-8">
             <button
               class="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-              @click="onSubmit"
               :disabled="isLoadSubmit"
+              @click="onSubmit"
             >
               <loading-circle-icon
                 v-if="isLoadSubmit"
@@ -126,6 +134,7 @@ const {
 
 const isLoad = ref(false);
 const isDead = ref(false);
+const isNotFound = ref(false);
 
 const isLoadSubmit = ref(false);
 const isCopy = ref(false);
@@ -218,6 +227,7 @@ onMounted(async () => {
     const result = await client.get(`rooms/${roomCode}`).json();
     Object.assign(roomData, result);
   } catch (error) {
+    isNotFound.value = error.response?.status === 404;
     isDead.value = true;
     console.error(error);
   }
