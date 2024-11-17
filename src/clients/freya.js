@@ -2,13 +2,14 @@ import ky from "ky";
 
 const {
   VITE_FREYA_RECV_HOST: baseUrl,
+  VITE_SARA_TOKEN_TYPE: tokenType,
   VITE_SARA_TOKEN_NAME: tokenName,
 } = import.meta.env;
 
 const readSaraToken = (request) => {
   const tokenValue = localStorage.getItem(tokenName);
   if (!tokenValue) return;
-  request.headers.set("authorization", `SARA ${tokenValue}`);
+  request.headers.set("authorization", `${tokenType} ${tokenValue}`);
 };
 
 export const useClient = (withAuth = true) => {
