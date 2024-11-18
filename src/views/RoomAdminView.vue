@@ -50,8 +50,8 @@
           <button
             title="複製"
             class="m-2 rounded px-4 py-2 font-semibold"
-            @click="onClickSend"
             :disabled="isSent"
+            @click="onClickSend"
           >
             <check-icon
               v-if="isSent"
@@ -70,7 +70,12 @@
           <li
             v-for="i in roomData.administrators"
             :key="i.id"
-            class="rounded-md flex flex-1 items-center px-4 py-1-2 my-3 justify-between"
+            :class="{
+              'cursor-pointer': !i.isCreator,
+              'hover:bg-gray-300': !i.isCreator
+            }"
+            class="rounded-md flex flex-1 items-center px-4 py-2 my-1 justify-between"
+            @click="onClickRemove(i.id, i.isCreator)"
           >
             <img
               :alt="i.nickname"
@@ -109,8 +114,13 @@
 <script setup>
 import {ref, reactive, computed, onMounted} from "vue";
 
-import {useRoute} from "vue-router";
-import {useClient} from "../clients/freya";
+import {
+  useRoute,
+  useRouter,
+} from "vue-router";
+import {
+  useClient,
+} from "../clients/freya";
 import {
   useClient as useSaraClient,
   getUserProfile,
@@ -128,6 +138,7 @@ import ToastModal from "../components/ToastModal.vue";
 import LoadingCircleIcon from "../components/LoadingCircleIcon.vue";
 
 const route = useRoute();
+const router = useRouter();
 const client = useClient();
 const saraClient = useSaraClient();
 const profile = useProfile();
@@ -183,6 +194,34 @@ const onClickSend = async () => {
     console.error(error);
   }
   isSent.value = false;
+};
+
+const onClickRemove = async (userId, isCreator) => {
+  if (isCreator) {
+    return;
+  }
+
+  if (!confirm("確定要移除該管理員？")) {
+    return;
+  }
+
+  try {
+    await client.delete(`rooms/${roomCode}/administrators/${userId}`);
+    if (userId === profile._id) {
+      statusMessage.value = "已將您移除出管理員";
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
+    } else {
+      statusMessage.value = "已移除該管理員";
+      roomData.administrators = roomData.administrators.filter(
+        (i) => i.id !== userId,
+      );
+    }
+  } catch (error) {
+    statusMessage.value = "移除管理員失敗";
+    console.error(error);
+  }
 };
 
 onMounted(async () => {

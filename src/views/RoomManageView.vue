@@ -75,9 +75,9 @@
             </button>
           </div>
         </div>
-        <div class="flex justify-end mt-8">
+        <div class="flex justify-center mt-8">
           <button
-            class="flex items-center justify-center bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full mr-3"
+            class="flex items-center justify-center bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full mx-3 w-full"
             :disabled="isLoadRefresh"
             @click="onClickRefresh"
           >
@@ -90,16 +90,24 @@
             </span>
           </button>
           <button
-            class="flex items-center justify-center bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-full mr-3"
+            class="flex items-center justify-center bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full mx-3 w-full"
+            @click="onClickDestoryRoom"
+          >
+            刪除社群
+          </button>
+        </div>
+        <div class="flex justify-center mt-1">
+          <button
+            class="flex items-center justify-center bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-full mx-3 w-full"
             @click="onClickInvite"
           >
-            共同管理員
+            管理人員
           </button>
           <button
-            class="flex items-center justify-center bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
+            class="flex items-center justify-center bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full mx-3 w-full"
             @click="onClickCommit"
           >
-            進入審核系統
+            審核系統
           </button>
         </div>
       </div>
@@ -209,6 +217,23 @@ const onClickRefresh = async () => {
   Object.assign(roomData, result);
   statusMessage.value = "更新成功";
   isLoadRefresh.value = false;
+};
+
+const onClickDestoryRoom = async () => {
+  if (!confirm("確定要刪除社群？")) {
+    return;
+  }
+
+  try {
+    await client.delete(`rooms/${roomCode}`);
+    statusMessage.value = "已刪除社群";
+    setTimeout(() => {
+      router.push("/");
+    }, 3000);
+  } catch (error) {
+    statusMessage.value = "刪除社群失敗";
+    console.error(error);
+  }
 };
 
 const onClickInvite = () => {

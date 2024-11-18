@@ -2,6 +2,7 @@ import {jwtDecode} from "jwt-decode";
 
 const {
   VITE_SARA_INTE_HOST: saraInteHost,
+  VITE_SARA_TOKEN_TYPE: saraTokenType,
   VITE_SARA_TOKEN_NAME: saraTokenName,
 } = import.meta.env;
 
@@ -13,6 +14,13 @@ export const useProfile = (avatarSize=80) => {
   const saraToken = localStorage.getItem(saraTokenName);
   if (!saraToken) {
     return null;
+  }
+
+  if (saraTokenType === "TEST") {
+    const profile = JSON.parse(atob(saraToken));
+    const avatarHash = profile?.avatar_hash;
+    const avatarUrl = hashToGravatar(avatarHash, avatarSize);
+    return {...profile, avatarUrl};
   }
 
   try {
