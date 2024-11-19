@@ -79,10 +79,14 @@
           </div>
         </div>
         <div v-else>
-          <p
-            class="mt-6 text-gray-600"
-            v-html="descriptionHtml"
-          />
+          <p class="mt-6 text-gray-600">
+            <span
+              v-for="(i, j) in descriptionLines"
+              :key="j"
+            >
+              {{ i }}<br>
+            </span>
+          </p>
           <div class="checkbox my-3">
             <div
               id="captcha"
@@ -154,18 +158,8 @@ const isSubmmited = computed(() => {
   return submissionCode.value !== "";
 });
 
-const descriptionHtml = computed(() => {
-  const escapeMap = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "\"": "&quot;",
-    "'": "&#039;",
-  };
-  const {description} = roomData;
-  return description?.
-    replace(/[&<>"']/g, (i) => escapeMap[i]).
-    replaceAll("\n", "<br />");
+const descriptionLines = computed(() => {
+  return roomData.description.split("\n");
 });
 
 const backgroundStyle = computed(() => {

@@ -44,10 +44,14 @@
           </p>
           <div class="mt-6 text-gray-600">
             簡介：
-            <p
-              class="my-2 mx-1 text-gray-800 text-sm"
-              v-html="descriptionHtml"
-            />
+            <p class="my-2 mx-1 text-gray-800 text-sm">
+              <span
+                v-for="(i, j) in descriptionLines"
+                :key="j"
+              >
+                {{ i }}<br>
+              </span>
+            </p>
           </div>
           <p class="mt-4 text-gray-600">
             社群邀請網址：
@@ -55,7 +59,7 @@
           <div class="w-full mb-4 text-gray-600 flex rounded bg-white shadow-md">
             <input
               :value="inviteUrl"
-              class="w-full border-none bg-transparent px-4 py-3 text-gray-900 outline-none focus:outline-none text-gray-500"
+              class="w-full border-none bg-transparent px-4 py-3 outline-none focus:outline-none text-gray-500"
               type="text"
               readonly
             >
@@ -165,18 +169,8 @@ const inviteUrl = computed(() => {
   return `${freyaInteHost}/#/ti/g2/${roomCode}`;
 });
 
-const descriptionHtml = computed(() => {
-  const escapeMap = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "\"": "&quot;",
-    "'": "&#039;",
-  };
-  const {description} = roomData;
-  return description?.
-    replace(/[&<>"']/g, (i) => escapeMap[i]).
-    replaceAll("\n", "<br />");
+const descriptionLines = computed(() => {
+  return roomData.description.split("\n");
 });
 
 const backgroundStyle = computed(() => {
