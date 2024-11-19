@@ -15,15 +15,15 @@ const hashToGravatar = (hash, size=80) => {
   return `https://api.gravatar.com/avatar/${hash}?d=identicon&s=${size}`;
 };
 
-export const getUserProfile = async (client, id, size=80) => {
+export const getUserProfile = async (client, id, avatarSize=80) => {
   if (saraTokenType === "TEST") {
     const nickname = id.substring(0, 8);
-    const avatarUrl = hashToGravatar(id, size);
+    const avatarUrl = hashToGravatar(id, avatarSize);
     return {id, nickname, avatarUrl};
   }
 
   const user = await client.get(`users/${id}`).json();
   const {nickname, avatar_hash: avatarHash} = user.profile;
-  const avatarUrl = hashToGravatar(avatarHash, size);
+  const avatarUrl = hashToGravatar(avatarHash, avatarSize);
   return {id, nickname, avatarUrl};
 };

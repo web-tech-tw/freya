@@ -1,7 +1,35 @@
 <template>
   <div :style="backgroundStyle">
+    <div v-if="!isLogged">
+      <div class="py-20 text-center">
+        <div class="text-red-500 text-xl font-bold">
+          尚未登入
+        </div>
+        <div class="mt-4 text-gray-700">
+          請使用您所受到邀請的電子郵件地址註冊或登入，以接受邀請。<br>
+          若非使用邀請函應對的電子郵件地址，本頁面將無法存取。
+        </div>
+        <div class="mt-4 text-gray-700">
+          如果這個電子郵件不是您主要使用的電子郵件地址，<br>
+          請聯絡邀請您的使用者重新發送邀請函。
+        </div>
+        <div class="flex justify-center mt-8">
+          <loading-circle-icon
+            v-if="isLoadLogin"
+            class="h-8 w-8 animate-spin text-lime-600"
+          />
+          <button
+            v-else
+            class="flex items-center justify-center bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
+            @click="onClickLogin"
+          >
+            我明白了，前往登入
+          </button>
+        </div>
+      </div>
+    </div>
     <div
-      v-if="isNotFound"
+      v-else-if="isNotFound"
       class="flex flex-wrap w-full justify-center bg-white py-20"
     >
       <div class="text-center text-amber-700">
@@ -95,19 +123,24 @@ import ToastModal from "../components/ToastModal.vue";
 
 import {useRoute, useRouter} from "vue-router";
 import {useClient} from "../clients/freya.js";
+import {redirectLogin, useProfile} from "../plugins/profile.js";
 
 const route = useRoute();
 const router = useRouter();
 const client = useClient();
+const profile = useProfile();
 
 const {
   invitationCode,
 } = route.params;
 
+const isLogged = profile !== null;
+
 const isLoad = ref(false);
 const isDead = ref(false);
 const isNotFound = ref(false);
 
+const isLoadLogin = ref(false);
 const isLoadAccept = ref(false);
 const isLoadReject = ref(false);
 
@@ -155,6 +188,13 @@ const backdropClass = computed(() => {
   const {backgroundImage} = roomData;
   return !!backgroundImage ? "backdrop-brightness-50" : "";
 });
+
+const onClickLogin = () => {
+  isLoadLogin.value = true;
+  setTimeout(() => {
+    redirectLogin();
+  }, 1000);
+};
 
 const onClickAccept = async () => {
   isLoadAccept.value = true;

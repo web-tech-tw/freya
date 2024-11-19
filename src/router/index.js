@@ -58,7 +58,7 @@ router.beforeEach((to, _, next) => {
   if (
     to.path === "/" ||
     to.path === "/terms" ||
-    to.path.startsWith("/ti/g2/")
+    to.path.startsWith("/ti/")
   ) {
     next();
     return;
