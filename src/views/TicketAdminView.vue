@@ -192,7 +192,7 @@ const backdropClass = computed(() => {
 const onClickLogin = () => {
   isLoadLogin.value = true;
   setTimeout(() => {
-    redirectLogin();
+    redirectLogin(true);
   }, 1000);
 };
 
